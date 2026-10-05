@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>Video Hobi</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   BODY AWAL
+========================= */
+
+body {
+    background: linear-gradient(
+        135deg,
+        #ffeef8,
+        #eee7ff,
+        #fff5fb
+    );
+
+    transition:
+        background 1.5s ease,
+        color 1.5s ease;
+}
+
+
+/* =========================
+   LAYAR AWAL
+========================= */
+
+#awal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #ffffff,
+            #fbeafa 45%,
+            #eee8ff
+        );
+}
+
+
+/* =========================
+   TOMBOL MULAI
+========================= */
+
+#mulai {
+    border: none;
+
+    padding: 18px 55px;
+
+    border-radius: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        #ff75b5,
+        #a875ff
+    );
+
+    box-shadow:
+        0 10px 30px rgba(180, 100, 220, .35);
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#mulai:active {
+    transform: scale(.92);
+}
+
+
+/* =========================
+   KONTEN VIDEO
+========================= */
+
+#konten {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff4fb,
+            #f0eaff
+        );
+
+    transition:
+        background 1.5s ease;
+}
+
+
+/* =========================
+   VIDEO
+========================= */
+
+#video {
+    width: min(88vw, 850px);
+
+    max-height: 67vh;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    background: #000;
+
+    box-shadow:
+        0 12px 40px rgba(80, 50, 100, .25);
+
+    transition:
+        box-shadow 1.5s ease,
+        border-radius 1.5s ease;
+}
+
+
+/* =========================
+   KATA-KATA DI BAWAH VIDEO
+========================= */
+
+#kata {
+    width: min(90vw, 850px);
+
+    min-height: 55px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 8px 15px;
+
+    font-size: clamp(
+        18px,
+        4.5vw,
+        30px
+    );
+
+    font-weight: bold;
+
+    color: #555;
+
+    transition:
+        color 1.5s ease,
+        text-shadow 1.5s ease,
+        transform .4s ease;
+}
+
+#kata.animasi {
+    transform: scale(1.04);
+}
+
+
+/* =========================
+   TOMBOL HOBI (LINK)
+========================= */
+
+#hobiBtn {
+    display: inline-block;
+
+    text-decoration: none;
+    text-align: center;
+
+    position: fixed;
+
+    right: 15px;
+    bottom: 15px;
+
+    z-index: 60;
+
+    padding: 12px 18px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: white;
+
+    background: rgba(30, 30, 40, .85);
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#hobiBtn:active {
+    transform: scale(.92);
+}
+
+
+/* =========================
+   SALJU
+========================= */
+
+#salju {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+    overflow: hidden;
+}
+
+.keping {
+    position: absolute;
+
+    top: -20px;
+
+    color: white;
+
+    opacity: .55;
+
+    font-size: 12px;
+
+    animation:
+        jatuh linear infinite;
+
+    text-shadow:
+        0 0 5px white;
+}
+
+@keyframes jatuh {
+
+    0% {
+        transform:
+            translateY(-20px)
+            translateX(0)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(50px)
+            rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   MODE GAHAR
+========================= */
+
+body.gahar #konten {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #240000,
+            #090909 55%,
+            #000000
+        );
+}
+
+
+body.gahar #video {
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.5),
+        0 0 45px rgba(255,0,0,.2);
+}
+
+
+body.gahar #kata {
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 5px #ff0000,
+        0 0 15px #ff0000;
+}
+
+
+body.gahar #hobiBtn {
+
+    background:
+        linear-gradient(
+            135deg,
+            #550000,
+            #c00000
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.45);
+}
+
+
+/* =========================
+   GARIS GAHAR
+========================= */
+
+body.gahar #konten::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border: 1px solid rgba(255,0,0,.25);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   RESPONSIVE HP
+========================= */
+
+@media(max-width:600px) {
+
+    #konten {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    #video {
+        width: 90vw;
+        max-height: 62vh;
+        border-radius: 14px;
+    }
+
+    #kata {
+        font-size: 18px;
+        min-height: 50px;
+    }
+
+    #hobiBtn {
+        right: 10px;
+        bottom: 10px;
+        padding: 10px 14px;
+        font-size: 11px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     LAYAR AWAL
+========================= -->
+
+<div id="awal">
+
+    <button id="mulai">
+        MULAI
+    </button>
+
+</div>
+
+
+<!-- =========================
+     HALAMAN VIDEO
+========================= -->
+
+<div id="konten">
+
+    <video
+        id="video"
+        playsinline
+        controls>
+
+        <source
+            src="video.mp4"
+            type="video/mp4">
+
+        Browser kamu tidak mendukung video.
+
+    </video>
+
+
+    <!-- KATA-KATA DI BAWAH VIDEO -->
+
+    <div id="kata">
+        Jangan takut gagal.
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOMBOL HOBI (LINK)
+========================= -->
+
+<a id="hobiBtn"
+   href="https://vt.tiktok.com/ZSbxbDr8g/"
+   target="_blank"
+   rel="noopener noreferrer">
+   Hobi yang aku maksud (pencet aku) 
+</a>
+
+
+<!-- =========================
+     SALJU
+========================= -->
+
+<div id="salju"></div>
+
+
+<script>
+
+/* =========================
+   ELEMENT
+========================= */
+
+const awal = document.getElementById("awal");
+
+const mulai = document.getElementById("mulai");
+
+const konten = document.getElementById("konten");
+
+const video = document.getElementById("video");
+
+const kata = document.getElementById("kata");
+
+const hobiBtn = document.getElementById("hobiBtn");
+
+const salju = document.getElementById("salju");
+
+
+/* =========================
+   SALJU
+========================= */
+
+function buatSalju() {
+
+    const keping = document.createElement("div");
+
+    keping.className = "keping";
+
+    keping.innerHTML = "❄";
+
+    keping.style.left =
+        Math.random() * 100 + "%";
+
+    keping.style.fontSize =
+        (8 + Math.random() * 12) + "px";
+
+    keping.style.animationDuration =
+        (5 + Math.random() * 7) + "s";
+
+    keping.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    salju.appendChild(keping);
+
+    setTimeout(() => {
+        keping.remove();
+    }, 13000);
+}
+
+
+/* Buat salju berkala */
+
+setInterval(buatSalju, 350);
+
+
+/* =========================
+   ANIMASI KATA
+========================= */
+
+function gantiKata(teks) {
+
+    kata.classList.remove("animasi");
+
+    setTimeout(() => {
+
+        kata.textContent = teks;
+
+        kata.classList.add("animasi");
+
+    }, 150);
+
+}
+
+
+/* =========================
+   MULAI VIDEO
+========================= */
+
+mulai.addEventListener("click", () => {
+
+    awal.style.display = "none";
+
+    konten.style.display = "flex";
+
+    video.currentTime = 0;
+
+    video.play().catch(() => {
+        console.log(
+            "Video membutuhkan interaksi pengguna."
+        );
+    });
+
+
+    /* Kata pertama */
+
+    gantiKata(
+        "Jangan takut gagal."
+    );
+
+
+    /* Kata kedua */
+
+    setTimeout(() => {
+
+        gantiKata(
+            "Terus belajar dan berkembang."
+        );
+
+    }, 2500);
+
+
+    /* =========================
+       SETELAH 5 DETIK
+       GANTI KE MODE GAHAR
+    ========================= */
+
+    setTimeout(() => {
+
+        document.body.classList.add("gahar");
+
+        gantiKata(
+            "Jangan takut gagal. Terus perbaiki hobimu."
+        );
+
+    }, 5000);
+
+});
+
+
+/* =========================
+   TOMBOL HOBI (LINK)
+   Link tetap terbuka lewat href,
+   JS hanya mengganti kata.
+========================= */
+
+hobiBtn.addEventListener("click", () => {
+
+    gantiKata(
+        ""
+    );
+
+});
+
+
+/* =========================
+   KETIKA VIDEO SELESAI
+========================= */
+
+video.addEventListener("ended", () => {
+
+    gantiKata(
+        "Jangan berhenti belajar. Terus kembangkan hobimu."
+    );
+
+});
+
+</script>
+
+</body>
+</html>
